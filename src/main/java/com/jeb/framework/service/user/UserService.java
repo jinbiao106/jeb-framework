@@ -2,7 +2,6 @@ package com.jeb.framework.service.user;
 
 import com.jeb.framework.mapper.UserMapper;
 import com.jeb.framework.model.domain.User;
-import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,7 @@ import java.util.List;
 @Service
 public class UserService {
 
-    @Resource
+    @Autowired
     private UserMapper userMapper;
 
     public List<User> list() {

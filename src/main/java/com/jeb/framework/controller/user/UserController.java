@@ -1,11 +1,14 @@
 package com.jeb.framework.controller.user;
 
 import com.jeb.framework.model.domain.User;
+import com.jeb.framework.model.dto.user.UserReqDTO;
 import com.jeb.framework.service.user.UserService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,6 +18,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user")
+@Tag(name = "用户信息管理", description = "用户信息管理描述")
 public class UserController {
 
 
@@ -23,7 +27,10 @@ public class UserController {
 
 
     @PostMapping("/list")
-    public List<User> list(){
+    @ResponseBody
+    @Operation(summary = "获取用户列表")
+    public List<User> list(@Validated @RequestBody UserReqDTO userReqDTO){
+        System.out.println("name:"+userReqDTO.getName());
         List<User> users = userService.list();
         return users;
     }

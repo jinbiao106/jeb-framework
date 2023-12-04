@@ -1,10 +1,19 @@
 server:
-  port: 9000
+  port: 8080
 spring:
   profiles:
     active: dev
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher #解决springboot新版本集成swagger报错问题
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 logging:
   level:
     com.jeb.framework.mapper: debug
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+
