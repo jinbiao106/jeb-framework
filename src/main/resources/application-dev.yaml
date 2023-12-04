@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:mysql://172.168.30.66:3006/gy?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false&batchedStatements=true
+    username: root
+    password: Dexyq#2021
+    driver-class-name: com.mysql.cj.jdbc.Driver
