@@ -1,5 +1,6 @@
 package com.jeb.framework.response;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,12 +14,12 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class ResultData<T> {
 
-//    @ApiModelProperty("异常编码")
+    @Schema(description = "异常编码",  example = "500")
     private String errorCode;
-//    @ApiModelProperty("异常描述")
+    @Schema(description = "异常描述")
     private String errorMessage;
-//    @ApiModelProperty("请求是否成功")
+    @Schema(description = "请求是否成功",  example = "true")
     private boolean success;
-//    @ApiModelProperty("反参数据")
+    @Schema(description = "返回数据",  example = "{}")
     private T data;
 }

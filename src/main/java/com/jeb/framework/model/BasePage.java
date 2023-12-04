@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.Range;
 public class BasePage {
 
     @Schema(description = "当前页：从1开始", required = true)
-    @Range(max = 10000, min = 1, message = "页码非法范围")
+    @Range(max = 10000, min = 0, message = "页码非法范围")
     private int current = 1;
 
     @Schema(description = "每页条数，最大100", required = true)

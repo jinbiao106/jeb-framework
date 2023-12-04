@@ -1,4 +1,4 @@
-package com.jeb.framework.handle;
+package com.jeb.framework.exception;
 
 
 import com.jeb.framework.exception.BusinessException;
