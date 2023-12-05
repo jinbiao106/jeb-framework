@@ -1,6 +1,8 @@
 package com.jeb.framework.model.dto.user;
 
+
 import com.jeb.framework.model.BasePage;
+import com.jeb.framework.response.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

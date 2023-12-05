@@ -1,7 +1,11 @@
 package com.jeb.framework.controller.user;
 
+import com.github.pagehelper.Page;
 import com.jeb.framework.model.domain.User;
 import com.jeb.framework.model.dto.user.UserReqDTO;
+import com.jeb.framework.response.BaseController;
+import com.jeb.framework.response.PageInfo;
+import com.jeb.framework.response.ResultData;
 import com.jeb.framework.service.user.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,7 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 @Tag(name = "用户信息管理", description = "用户信息管理描述")
-public class UserController {
+public class UserController extends BaseController {
 
 
     @Autowired
@@ -29,9 +33,8 @@ public class UserController {
     @PostMapping("/list")
     @ResponseBody
     @Operation(summary = "获取用户列表")
-    public List<User> list(@Validated @RequestBody UserReqDTO userReqDTO){
-        System.out.println("name:"+userReqDTO.getName());
-        List<User> users = userService.list();
-        return users;
+    public ResultData<PageInfo<User>> list(@Validated @RequestBody UserReqDTO userReqDTO){
+       PageInfo<User> page = userService.list(userReqDTO);
+        return success(page);
     }
 }
