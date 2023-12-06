@@ -25,8 +25,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class LoggerAspect {
 
-    @Around("@within(org.springframework.web.bind.annotation.RestController)" +
-            "||@within(org.springframework.stereotype.Controller)")
+//    @Around("@within(org.springframework.web.bind.annotation.RestController)" +
+//            "||@within(org.springframework.stereotype.Controller)")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         Object isIgnorePrint = null;

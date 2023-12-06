@@ -37,4 +37,11 @@ public class UserController extends BaseController {
        PageInfo<User> page = userService.list(userReqDTO);
         return success(page);
     }
+
+    @PostMapping("/selectCursor")
+    @ResponseBody
+    @Operation(summary = "通过游标获取数据")
+    public void selectCursor(){
+        userService.selectCursor();
+    }
 }

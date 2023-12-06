@@ -1,6 +1,8 @@
 package com.jeb.framework.mapper;
 
 import com.jeb.framework.model.domain.User;
+import org.apache.ibatis.annotations.MapKey;
+import org.apache.ibatis.cursor.Cursor;
 
 import java.util.List;
 
@@ -11,6 +13,9 @@ import java.util.List;
 * @Entity generator.domain.JebUser
 */
 public interface UserMapper {
+
+    @MapKey("id")
+    Cursor<User> selectCursor();
 
     int deleteByPrimaryKey(Long id);
 

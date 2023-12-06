@@ -26,6 +26,9 @@
         select  <include refid="Base_Column_List" />  from jeb_user
 
     </select>
+    <select id="selectCursor" resultType="com.jeb.framework.model.domain.User" fetchSize="2">
+        select * from jeb_user;
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from jeb_user
