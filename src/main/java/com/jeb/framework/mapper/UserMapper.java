@@ -2,6 +2,7 @@ package com.jeb.framework.mapper;
 
 import com.jeb.framework.model.domain.User;
 import org.apache.ibatis.annotations.MapKey;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.cursor.Cursor;
 
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.List;
 * @Entity generator.domain.JebUser
 */
 public interface UserMapper {
+
+    List<User> selectBatch(@Param("list") List<Long> list);
 
     @MapKey("id")
     Cursor<User> selectCursor();
@@ -30,4 +33,9 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     List<User> list();
+
+
+    int batchInsertByForeach(@Param("list") List<User> list);
+
+    int batchUpdate(@Param("list") List<User> list);
 }

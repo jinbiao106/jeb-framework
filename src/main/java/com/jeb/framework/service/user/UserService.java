@@ -8,6 +8,9 @@ import com.jeb.framework.response.PageInfo;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.cursor.Cursor;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +29,8 @@ public class UserService {
     private UserMapper userMapper;
 
 
+    @Resource
+    private SqlSessionFactory sqlSessionFactory;
 
     public PageInfo<User> list(UserReqDTO userReqDTO) {
         PageHelper.startPage(userReqDTO.getPageNum(), userReqDTO.getPageSize());
@@ -48,8 +53,39 @@ public class UserService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
+    }
+    @Transactional
+    public void batchInsert(List<User> userList) {
+        // ExecutorType.SIMPLE: 这个执行器类型不做特殊的事情。它为每个语句的执行创建一个新的预处理语句。
+        // ExecutorType.REUSE: 这个执行器类型会复用预处理语句。
+        // ExecutorType.BATCH: 这个执行器会批量执行所有更新语句,如果 SELECT 在它们中间执行还会标定它们是 必须的,来保证一个简单并易于理解的行为。
+        // 关闭session的自动提交
+        SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH, false);
+        try {
+            UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+            userList.forEach(user -> mapper.insertSelective(user));
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (Exception e){
+            sqlSession.rollback();
+            throw new RuntimeException(e);
+        }finally {
+            if (sqlSession != null) {
+                sqlSession.close();
+            }
+        }
 
     }
 
+    public void batchInsertByForeach(List<User> users) {
+        userMapper.batchInsertByForeach(users);
+    }
+
+    public List<User> selectBatch(List<Long> list) {
+        return userMapper.selectBatch(list);
+    }
+
+    public int batchUpdate(List<User> list) {
+        return userMapper.batchUpdate(list);
+    }
 }

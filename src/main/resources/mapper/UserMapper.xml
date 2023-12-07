@@ -5,10 +5,10 @@
 <mapper namespace="com.jeb.framework.mapper.UserMapper">
 
     <resultMap id="BaseResultMap" type="com.jeb.framework.model.domain.User">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="name" column="name" jdbcType="VARCHAR"/>
-            <result property="age" column="age" jdbcType="INTEGER"/>
-            <result property="address" column="address" jdbcType="VARCHAR"/>
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="INTEGER"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -16,67 +16,103 @@
         address
     </sql>
 
+    <insert id="batchInsertByForeach" parameterType="list">
+        insert into jeb_user(name,age,address) values
+        <foreach collection="list" item="user" separator=",">
+            (#{user.name},#{user.age},#{user.address})
+        </foreach>
+    </insert>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from jeb_user
-        where  id = #{id,jdbcType=BIGINT} 
+        where id = #{id,jdbcType=BIGINT}
     </select>
     <select id="list" resultType="com.jeb.framework.model.domain.User">
-        select  <include refid="Base_Column_List" />  from jeb_user
+        select
+        <include refid="Base_Column_List"/>
+        from jeb_user
 
     </select>
     <select id="selectCursor" resultType="com.jeb.framework.model.domain.User" fetchSize="2">
         select * from jeb_user;
     </select>
+    <select id="selectBatch" resultType="com.jeb.framework.model.domain.User">
+        select * from jeb_user where id in
+        <foreach collection="list" item="id" open="(" separator="," close=")" index="index" nullable="false">
+            #{id}
+        </foreach>
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from jeb_user
-        where  id = #{id,jdbcType=BIGINT} 
+        where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.jeb.framework.model.domain.User" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.jeb.framework.model.domain.User"
+            useGeneratedKeys="true">
         insert into jeb_user
         ( id,name,age
         ,address)
         values (#{id,jdbcType=BIGINT},#{name,jdbcType=VARCHAR},#{age,jdbcType=INTEGER}
         ,#{address,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.jeb.framework.model.domain.User" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.jeb.framework.model.domain.User"
+            useGeneratedKeys="true">
         insert into jeb_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
-                <if test="id != null">id,</if>
-                <if test="name != null">name,</if>
-                <if test="age != null">age,</if>
-                <if test="address != null">address,</if>
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="age != null">age,</if>
+            <if test="address != null">address,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-                <if test="id != null">#{id,jdbcType=BIGINT},</if>
-                <if test="name != null">#{name,jdbcType=VARCHAR},</if>
-                <if test="age != null">#{age,jdbcType=INTEGER},</if>
-                <if test="address != null">#{address,jdbcType=VARCHAR},</if>
+            <if test="id != null">#{id,jdbcType=BIGINT},</if>
+            <if test="name != null">#{name,jdbcType=VARCHAR},</if>
+            <if test="age != null">#{age,jdbcType=INTEGER},</if>
+            <if test="address != null">#{address,jdbcType=VARCHAR},</if>
         </trim>
     </insert>
+
     <update id="updateByPrimaryKeySelective" parameterType="com.jeb.framework.model.domain.User">
         update jeb_user
         <set>
-                <if test="name != null">
-                    name = #{name,jdbcType=VARCHAR},
-                </if>
-                <if test="age != null">
-                    age = #{age,jdbcType=INTEGER},
-                </if>
-                <if test="address != null">
-                    address = #{address,jdbcType=VARCHAR},
-                </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
         </set>
-        where   id = #{id,jdbcType=BIGINT} 
+        where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.jeb.framework.model.domain.User">
         update jeb_user
-        set 
-            name =  #{name,jdbcType=VARCHAR},
-            age =  #{age,jdbcType=INTEGER},
-            address =  #{address,jdbcType=VARCHAR}
-        where   id = #{id,jdbcType=BIGINT} 
+        set
+        name = #{name,jdbcType=VARCHAR},
+        age = #{age,jdbcType=INTEGER},
+        address = #{address,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="batchUpdate" parameterType="list">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update jeb_user
+            <set>
+                <if test="item.name != null">
+                    name = #{item.name,jdbcType=VARCHAR},
+                </if>
+                <if test="item.age != null">
+                    age = #{item.age,jdbcType=INTEGER},
+                </if>
+                <if test="item.address != null">
+                    address = #{item.address,jdbcType=VARCHAR},
+                </if>
+            </set>
+            where id = #{item.id,jdbcType=BIGINT}
+        </foreach>
     </update>
 </mapper>
