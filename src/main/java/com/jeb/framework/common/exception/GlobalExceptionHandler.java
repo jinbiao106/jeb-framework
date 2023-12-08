@@ -1,9 +1,8 @@
-package com.jeb.framework.exception;
+package com.jeb.framework.common.exception;
 
 
-import com.jeb.framework.exception.BusinessException;
-import com.jeb.framework.response.ResultCodeEnum;
-import com.jeb.framework.response.ResultData;
+import com.jeb.framework.common.response.ResultCodeEnum;
+import com.jeb.framework.common.response.ResultData;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageNotReadableException;

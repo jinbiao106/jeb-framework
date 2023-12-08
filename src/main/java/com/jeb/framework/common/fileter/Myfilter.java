@@ -1,4 +1,4 @@
-package com.jeb.framework.fileter;
+package com.jeb.framework.common.fileter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;

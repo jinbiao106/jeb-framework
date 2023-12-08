@@ -1,4 +1,4 @@
-package com.jeb.framework.response;
+package com.jeb.framework.common.response;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageSerializable;

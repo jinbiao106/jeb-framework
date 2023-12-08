@@ -1,4 +1,4 @@
-package com.jeb.framework.aspect;
+package com.jeb.framework.common.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.Aspect;
@@ -15,7 +15,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Slf4j
 public class IgnoreLoggerAspect {
 
-    @Before("@annotation(com.jeb.framework.annotation.IgnoreLoggerPrint)")
+    @Before("@annotation(com.jeb.framework.common.annotation.IgnoreLoggerPrint)")
     public void ignore() {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         if (requestAttributes != null) {

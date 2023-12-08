@@ -4,13 +4,14 @@ import com.github.pagehelper.PageHelper;
 import com.jeb.framework.mapper.UserMapper;
 import com.jeb.framework.model.domain.User;
 import com.jeb.framework.model.dto.user.UserReqDTO;
-import com.jeb.framework.response.PageInfo;
+import com.jeb.framework.common.response.PageInfo;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.cursor.Cursor;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -87,5 +88,15 @@ public class UserService {
 
     public int batchUpdate(List<User> list) {
         return userMapper.batchUpdate(list);
+    }
+
+    public int save(UserReqDTO userReqDTO) {
+        User user = new User();
+        BeanUtils.copyProperties(userReqDTO, user);
+        return userMapper.insertSelective(user);
+    }
+
+    public User selectOne(Long id) {
+        return userMapper.selectByPrimaryKey(id);
     }
 }

@@ -1,4 +1,4 @@
-package com.jeb.framework.response;
+package com.jeb.framework.common.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

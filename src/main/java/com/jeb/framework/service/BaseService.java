@@ -2,7 +2,7 @@ package com.jeb.framework.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.jeb.framework.response.PageParam;
+import com.jeb.framework.common.response.PageParam;
 
 import java.util.List;
 

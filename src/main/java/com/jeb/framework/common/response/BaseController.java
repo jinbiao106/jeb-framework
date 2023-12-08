@@ -1,4 +1,4 @@
-package com.jeb.framework.response;
+package com.jeb.framework.common.response;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -15,7 +15,7 @@ import java.io.Serializable;
  * @TableName jeb_user
  */
 @Data
-public class UserReqDTO extends BasePage implements Serializable {
+public class UserRespDTO extends BasePage implements Serializable {
 
     @NotNull(message = "用户名不能为空")
     @Schema(description = "用户名", required = true, example = "小明")
@@ -29,7 +29,7 @@ public class UserReqDTO extends BasePage implements Serializable {
     private String address;
 
     @Schema(description = "性别", maxLength = 2, example = "01")
-    private SexEnum sex;
+    private int sex;
     private static final long serialVersionUID = 1L;
 
 

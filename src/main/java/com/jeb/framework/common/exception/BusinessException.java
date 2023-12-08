@@ -6,7 +6,7 @@
  *
  */
 
-package com.jeb.framework.exception;
+package com.jeb.framework.common.exception;
 
 
 /**

@@ -1,4 +1,4 @@
-package com.jeb.framework.aspect;
+package com.jeb.framework.common.aspect;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONWriter;

@@ -1,4 +1,4 @@
-package com.jeb.framework.config;
+package com.jeb.framework.common.config;
 
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;

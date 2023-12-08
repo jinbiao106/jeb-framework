@@ -1,4 +1,4 @@
-package com.jeb.framework.annotation;
+package com.jeb.framework.common.annotation;
 
 import java.lang.annotation.*;
 
