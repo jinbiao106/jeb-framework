@@ -11,9 +11,9 @@ import lombok.ToString;
  * 
  * @TableName jeb_user
  */
-@Data
 @EqualsAndHashCode
 @ToString
+@Data
 public class User implements Serializable {
     /**
      * 
@@ -37,6 +37,7 @@ public class User implements Serializable {
     private String address;
 
     private SexEnum sex;
+
 
     private static final long serialVersionUID = 1L;
 

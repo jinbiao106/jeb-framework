@@ -1,18 +1,17 @@
 package com.jeb.framework.controller.user;
 
-import com.jeb.framework.enums.SexEnum;
 import com.jeb.framework.model.domain.User;
 import com.jeb.framework.model.dto.user.UserReqDTO;
 import com.jeb.framework.common.response.BaseController;
 import com.jeb.framework.common.response.PageInfo;
 import com.jeb.framework.common.response.ResultData;
 import com.jeb.framework.model.dto.user.UserRespDTO;
+import com.jeb.framework.model.mapstruct.UserMapper;
 import com.jeb.framework.service.user.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StopWatch;
 import org.springframework.validation.annotation.Validated;
@@ -46,9 +45,7 @@ public class UserController extends BaseController {
     @Operation(summary = "获取用户")
     public ResultData<UserRespDTO> selectOne(@RequestBody Long id){
         User user = userService.selectOne(id);
-        UserRespDTO respDTO = new UserRespDTO();
-        BeanUtils.copyProperties(user, respDTO);
-        respDTO.setSex(user.getSex().getCode());
+        UserRespDTO respDTO = UserMapper.INSTANCE.toRespDTO(user);
         return success(respDTO);
     }
 

@@ -1,7 +1,6 @@
 package com.jeb.framework.model.dto.user;
 
 
-import com.jeb.framework.enums.SexEnum;
 import com.jeb.framework.model.BasePage;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
@@ -29,7 +28,7 @@ public class UserRespDTO extends BasePage implements Serializable {
     private String address;
 
     @Schema(description = "性别", maxLength = 2, example = "01")
-    private int sex;
+    private Integer sex;
     private static final long serialVersionUID = 1L;
 
 
