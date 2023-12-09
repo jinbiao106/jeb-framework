@@ -6,6 +6,7 @@ import com.jeb.framework.model.dto.user.UserReqDTO;
 import com.jeb.framework.model.dto.user.UserRespDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.control.DeepClone;
 import org.mapstruct.factory.Mappers;
 
 /**
@@ -13,6 +14,7 @@ import org.mapstruct.factory.Mappers;
  * @Author GuYue
  */
 @Mapper
+// @Mapper(mappingControl = DeepClone.class)  深度克隆，适用于对象嵌套
 public interface UserMapper {
   UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
